@@ -8,7 +8,7 @@
   "extra": {
     "dev-kit": {
       "git": {
-        "https": "",
+        "https": "https://github.com/anodio/dev-kit.git",
         "ssh": "git@github.com:anodio/dev-kit.git"
       }
     }
