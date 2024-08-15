@@ -20,11 +20,13 @@ class DevPack extends Command
         $sshGitAddress = $composerJson['extra']['dev-kit']['git']['ssh'];
 
         //now lets clone package to another dir
-
+        shell_exec('rm -rf '.BASE_PATH.'/'.$packageName);
         @mkdir(BASE_PATH.'/'.$packageName);
         shell_exec('git clone '.$httpGitAddress.' '.BASE_PATH.'/'.$packageName);
-        shell_exec('cd '.BASE_PATH.'/'.$packageName.' && git remote set-url origin '.$sshGitAddress);
-
+        shell_exec('cd '.BASE_PATH.'/'.$packageName.' && git remote remove origin');
+        shell_exec('cd '.BASE_PATH.'/'.$packageName.' && git remote add origin '.$sshGitAddress);
+        shell_exec('rm -rf '.$vendorDir.'/'.$packageName);
+        symlink('../../'.$packageName, $vendorDir.'/'.$packageName);
         return 0;
     }
 
