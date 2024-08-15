@@ -2,7 +2,7 @@
   "name": "anodio/dev-kit",
   "autoload": {
     "psr-4": {
-      "Anodio\\DevKit": "src/"
+      "Anodio\\DevKit\\": "src/"
     }
   },
   "extra": {
