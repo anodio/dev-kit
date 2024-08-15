@@ -1,0 +1,16 @@
+{
+  "name": "anodio/dev-kit",
+  "autoload": {
+    "psr-4": {
+      "Anodio\\DevKit": "src/"
+    }
+  },
+  "extra": {
+    "dev-kit": {
+      "git": {
+        "https": "",
+        "ssh": "git@github.com:anodio/dev-kit.git"
+      }
+    }
+  }
+}
