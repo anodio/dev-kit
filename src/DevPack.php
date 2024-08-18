@@ -5,7 +5,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[\Bicycle\Core\Attributes\Command('dev:pack', 'Move package from vendor for development')]
+#[\Anodio\Core\Attributes\Command('dev:pack', 'Move package from vendor for development')]
 class DevPack extends Command
 {
     protected function execute(InputInterface $input, OutputInterface $output): int
