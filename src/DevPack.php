@@ -13,18 +13,14 @@ class DevPack extends Command
 
         $vendorDir = BASE_PATH . '/vendor';
         $packageName = $input->getArgument('packageName');
-        $composerJsonPath = $vendorDir.'/'.$packageName.'/composer.json';
-        $composerJson = json_decode(file_get_contents($composerJsonPath), true);
 
-        $httpGitAddress = $composerJson['extra']['dev-kit']['git']['https'];
-        $sshGitAddress = $composerJson['extra']['dev-kit']['git']['ssh'];
-
-        //now lets clone package to another dir
-        shell_exec('rm -rf '.BASE_PATH.'/'.$packageName);
-        @mkdir(BASE_PATH.'/'.$packageName);
-        shell_exec('git clone '.$httpGitAddress.' '.BASE_PATH.'/'.$packageName);
-        shell_exec('cd '.BASE_PATH.'/'.$packageName.' && git remote remove origin');
-        shell_exec('cd '.BASE_PATH.'/'.$packageName.' && git remote add origin '.$sshGitAddress);
+        $packageExploded = explode('/', $packageName);
+        $vendor = $packageExploded[0];
+        $packageWithoutVendorName = $packageExploded[1];
+        @mkdir(BASE_PATH.'/'.$vendor);
+        if (!file_exists(BASE_PATH.'/'.$vendor.'/'.$packageWithoutVendorName)) {
+            throw new \Exception('You forgot to clone package to '.BASE_PATH.'/'.$vendor.'/'.$packageWithoutVendorName);
+        }
         shell_exec('rm -rf '.$vendorDir.'/'.$packageName);
         symlink('../../'.$packageName, $vendorDir.'/'.$packageName);
         return 0;
